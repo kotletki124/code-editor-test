@@ -1,40 +1,72 @@
-# Code Editor Test (code-editor-test)
+# Онлайн редактор кода (тестовое задание на позицию Junior Frontend Developer)
 
-A Quasar Project
+## Запуск
 
-## Install the dependencies
-```bash
-yarn
-# or
+```code
 npm install
+npm run dev
+# Приложение запустится на http://localhost:9000
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+## Описание
 
+Это приложение представляет собой упрощённый онлайн-редактор кода, аналогичный платформе LeetCode, где пользователи могут писать и запускать код. Оно позволяет выбирать задачи, переключаться между ними, выбирать один из нескольких языков программирования (например, Go или Python), а также автоматически сохраняет изменения в решениях.
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
+---
 
+## Основной функционал
 
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
+1. **Выбор задач:**
+   - Доступен список задач с возможностью переключения между ними.
+   - Для каждой задачи отображается описание (Markdown).
 
+2. **Редактор кода:**
+   - Используется библиотека для работы с кодом (например, CodeMirror).
+   - Поддерживается переключение языков программирования, синтаксическая подсветка.
+   - Код автоматически сохраняется через 5 секунд после изменений (debounce).
 
-### Build the app for production
-```bash
-quasar build
-```
+3. **Выполнение кода:**
+   - Код отправляется на сервер для выполнения.
+   - Результат отображается (успех или ошибка).
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+4. **API и серверная логика (мокирование):**
+   - Используется **MirageJS** для имитации серверной части.
+   - Реализованы основные эндпоинты:
+
+---
+
+## Endpoints
+
+### `/auth/login`  
+**POST** — авторизация.  
+Ответ: `{ token: "sample_token_123" }`.
+
+### `/problems`  
+**GET** — список задач.  
+Если пользователь не авторизован, возвращаются задачи без решений.
+
+### `/problems/:id`  
+**GET** — задача по `id`.  
+Если пользователь авторизован, возвращаются решения, связанные с задачей.
+
+### `/solutions/:id`  
+**GET** — решение по `id`.  
+Ответ: данные решения.
+
+### `/solutions/:id`  
+**PATCH** — обновление кода решения.  
+Запрос: `{ code: "обновленный код" }`.
+
+### `/solutions/:id/execute`  
+**POST** — выполнение кода.  
+Ответ (рандомизирован):  
+- Успех: `{ status: 'success', message: 'Hello world' }`.  
+- Ошибка: `{ status: 'error', message: 'SyntaxError: Unexpected token' }`.
+
+---
+
+## Технологии
+
+- **Frontend:** Vue 3, Quasar Framework, Pinia, TypeScript.  
+- **Editor:** CodeMirror.  
+- **Backend (мок):** MirageJS.
