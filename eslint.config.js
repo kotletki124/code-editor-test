@@ -15,7 +15,7 @@ export default [
      *
      * ESLint requires "ignores" key to be the only one in this object
      */
-    ignores: ['src/server'],
+    ignores: ['src/server/'],
   },
 
   ...pluginQuasar.configs.recommended(),
