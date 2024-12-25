@@ -1,5 +1,8 @@
 # Онлайн редактор кода (тестовое задание на позицию Junior Frontend Developer)
 
+## Деплой
+[code-editor-test.vercel.app](https://code-editor-test.vercel.app/)
+
 ## Запуск
 
 ```code
